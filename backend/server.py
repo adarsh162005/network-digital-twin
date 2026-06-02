@@ -567,7 +567,7 @@ async def system_health():
     }
 
 
-app.include_router(api)
+
 from fastapi.middleware.cors import CORSMiddleware
 
 app.add_middleware(
@@ -580,6 +580,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+app.include_router(api)
 
 @app.on_event("shutdown")
 async def shutdown_db_client():
