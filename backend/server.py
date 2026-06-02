@@ -22,13 +22,15 @@ ASSETS = ROOT_DIR / "ml_assets"
 load_dotenv(ROOT_DIR / ".env")
 
 mongo_url = os.environ["MONGO_URL"]
+
 client = AsyncIOMotorClient(
-    MONGO_URL,
+    mongo_url,
     tls=True,
     tlsAllowInvalidCertificates=True,
     serverSelectionTimeoutMS=30000
 )
-db = mongo_client[os.environ["DB_NAME"]]
+
+db = client[os.environ["DB_NAME"]]
 
 FEATURES = [
     "latency_ms", "packet_loss_percent", "throughput_mbps", "utilization_percent",
@@ -589,4 +591,4 @@ app.include_router(api)
 
 @app.on_event("shutdown")
 async def shutdown_db_client():
-    mongo_client.close()
+    client.close()
