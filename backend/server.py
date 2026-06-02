@@ -22,7 +22,12 @@ ASSETS = ROOT_DIR / "ml_assets"
 load_dotenv(ROOT_DIR / ".env")
 
 mongo_url = os.environ["MONGO_URL"]
-mongo_client = AsyncIOMotorClient(mongo_url)
+client = AsyncIOMotorClient(
+    MONGO_URL,
+    tls=True,
+    tlsAllowInvalidCertificates=True,
+    serverSelectionTimeoutMS=30000
+)
 db = mongo_client[os.environ["DB_NAME"]]
 
 FEATURES = [
