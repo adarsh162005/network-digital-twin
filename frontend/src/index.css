@@ -1,0 +1,181 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+/* ===== Theme variables ===== */
+:root, .theme-dark {
+  --bg: #07070A;
+  --surface: #0F0F12;
+  --surface-2: #15151A;
+  --surface-3: #1B1B22;
+  --border: #232329;
+  --border-strong: #2E2E36;
+  --text: #F5F5F7;
+  --text-strong: #FFFFFF;
+  --muted: #8A8A93;
+  --muted-2: #6A6A72;
+  --cyan: #22D3EE;
+  --cyan-soft: #22D3EE33;
+  --emerald: #34D399;
+  --emerald-soft: #34D39933;
+  --amber: #F59E0B;
+  --amber-soft: #F59E0B33;
+  --red: #EF4444;
+  --red-soft: #EF444433;
+  --violet: #A78BFA;
+  --threshold: #F59E0B;
+  --grid-line: #1B1B22;
+}
+
+.theme-light {
+  --bg: #F8FAFB;
+  --surface: #FFFFFF;
+  --surface-2: #F1F4F7;
+  --surface-3: #E8EDF2;
+  --border: #E2E8EE;
+  --border-strong: #CBD5DD;
+  --text: #0F172A;
+  --text-strong: #020617;
+  --muted: #64748B;
+  --muted-2: #94A3B8;
+  --cyan: #0891B2;
+  --cyan-soft: #0891B21F;
+  --emerald: #059669;
+  --emerald-soft: #0596691F;
+  --amber: #B45309;
+  --amber-soft: #B453091F;
+  --red: #DC2626;
+  --red-soft: #DC26261F;
+  --violet: #7C3AED;
+  --threshold: #B45309;
+  --grid-line: #E2E8EE;
+}
+
+/* Shadcn semantic hsl variables (kept compatible) */
+@layer base {
+  :root {
+    --background: 240 10% 4%;
+    --foreground: 240 6% 96%;
+    --card: 240 9% 7%;
+    --card-foreground: 240 6% 96%;
+    --popover: 240 9% 7%;
+    --popover-foreground: 240 6% 96%;
+    --primary: 188 86% 53%;
+    --primary-foreground: 240 10% 4%;
+    --secondary: 240 6% 12%;
+    --secondary-foreground: 240 6% 96%;
+    --muted: 240 5% 14%;
+    --muted-foreground: 240 5% 60%;
+    --accent: 240 5% 14%;
+    --accent-foreground: 240 6% 96%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 4% 16%;
+    --input: 240 4% 16%;
+    --ring: 188 86% 53%;
+    --radius: 0.125rem;
+  }
+  .theme-light {
+    --background: 210 25% 98%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 192 91% 36%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 20% 95%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 210 20% 95%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 210 20% 95%;
+    --accent-foreground: 222 47% 11%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 215 20% 90%;
+    --input: 215 20% 90%;
+    --ring: 192 91% 36%;
+  }
+}
+
+html, body, #root {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'IBM Plex Sans', system-ui, sans-serif;
+  min-height: 100vh;
+  transition: background-color 0.18s ease, color 0.18s ease;
+}
+
+.font-mono-data {
+  font-family: 'JetBrains Mono', monospace;
+  font-feature-settings: "tnum" 1;
+}
+
+/* Background grid texture (subtle) */
+.bg-grid {
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-position: -1px -1px;
+}
+
+/* Utility classes that resolve to theme variables */
+.surface { background-color: var(--surface); border: 1px solid var(--border); }
+.surface-2 { background-color: var(--surface-2); border: 1px solid var(--border); }
+.surface-bg { background-color: var(--bg); }
+.border-app { border-color: var(--border); }
+.text-app { color: var(--text); }
+.text-strong-app { color: var(--text-strong); }
+.text-muted-app { color: var(--muted); }
+.text-muted2-app { color: var(--muted-2); }
+
+/* Accent text helpers */
+.text-cyan-app { color: var(--cyan); }
+.text-emerald-app { color: var(--emerald); }
+.text-amber-app { color: var(--amber); }
+.text-red-app { color: var(--red); }
+
+/* Bordered "chip" */
+.chip {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.25rem 0.5rem; font-size: 10px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  border: 1px solid var(--border); border-radius: 2px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--muted);
+}
+
+/* Status dot (non-pulsing for professional feel) */
+.status-dot { height: 6px; width: 6px; border-radius: 999px; display: inline-block; }
+
+/* Reduce shadcn radius globally to NOC sharp look */
+.rounded, .rounded-md, .rounded-lg { border-radius: 2px !important; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border-strong); }
+
+/* Recharts overrides */
+.recharts-cartesian-axis-tick-value {
+  fill: var(--muted) !important;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+}
+.recharts-tooltip-wrapper:focus { outline: none; }
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line { stroke: var(--grid-line) !important; }
+
+/* Override App.css legacy */
+.App { background: var(--bg); min-height: 100vh; }
+.App-header { background: transparent !important; min-height: auto !important; }
+
+/* Subtle entrance for cards (kept very mild) */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fade-in-up 0.25s ease-out both; }

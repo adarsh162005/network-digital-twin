@@ -1,0 +1,2 @@
+/* Reset legacy styles */
+.App { background: var(--bg); min-height: 100vh; }
