@@ -537,7 +537,20 @@ async def compare_scenarios(req: CompareRequest):
 
 @api.get("/system_health")
 async def system_health():
-    recent = await db.history.find({}, {"_id": 0, "graph_data": 0}).sort("timestamp", -1).to_list(20)
+    recent = []
+
+    try:
+        recent = await db.history.find(
+            {},
+            {"_id": 0, "graph_data": 0}
+        ).sort("timestamp", -1).to_list(20)
+
+    except Exception as e:
+        return {
+            "status": "degraded",
+            "mongo_error": str(e),
+            "message": "MongoDB query failed"
+        }
     risk_counts = {"Stable": 0, "Moderate": 0, "Elevated": 0, "High": 0, "Critical": 0}
     for r in recent:
         lvl = r.get("risk_level", "Stable")
