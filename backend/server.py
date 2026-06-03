@@ -545,10 +545,13 @@ async def system_health():
 
     # Component health checks
     db_ok = True
+    mongo_error = None
+
     try:
-        await db.command("ping")
-    except Exception:
+        await client.admin.command("ping")
+    except Exception as e:
         db_ok = False
+        mongo_error = str(e)
 
     components = [
         {"name": "Backend API", "status": "Operational", "tone": "ok"},
@@ -560,6 +563,7 @@ async def system_health():
 
     return {
         "model_loaded": True,
+        "mongo_error": mongo_error,
         "lstm_input_shape": list(LSTM_MODEL.input_shape[1:]),
         "scenarios_loaded": len(DATA_CACHE),
         "scenarios": list(DATA_CACHE.keys()),
