@@ -596,7 +596,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:3000",
-        "https://network-digital-twin-production.up.railway.app",
+        "https://network-digital-twin.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
